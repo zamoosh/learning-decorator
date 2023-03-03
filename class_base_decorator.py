@@ -1,22 +1,16 @@
 class Decorator:
-    def __init__(self, *args, **kwargs):
+    def __init__(self, function):
         print("starting the decorator")
-        self._args = args
-        self._kwargs = kwargs
-
-    def __call__(self, function):
         self.function = function
 
-        def decorator(*args, **kwargs):
-            print(self.function(*args, **kwargs))
-            print(args)
-            print(kwargs)
-            return self.function(*args, **kwargs)
+    def __call__(self, *args, **kwargs):
+        print(args)
+        print(kwargs)
 
-        return decorator
+        return self.function(*args, **kwargs)
 
 
-@Decorator(preson=45)
+@Decorator
 def ali(name: str):
     if name:
         return name + " ali ali ali"
